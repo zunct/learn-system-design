@@ -132,41 +132,41 @@ const IdGeneratorCaseStudy = () => {
         </h2>
         <div className="bg-slate-950/80 rounded-xl border border-slate-800 p-6 overflow-x-auto shadow-xl shadow-black">
           <pre className="text-sm font-mono leading-relaxed">
-            <code className="text-slate-300">
-<span className="text-fuchsia-400">class</span> <span className="text-amber-300">SnowflakeGenerator</span> {'{'}
-  <span className="text-fuchsia-400">private</span> workerId<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span>;
-  <span className="text-fuchsia-400">private</span> sequence<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> <span className="text-fuchsia-400">=</span> <span className="text-orange-400">0n</span>;
-  <span className="text-fuchsia-400">private</span> lastTimestamp<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> <span className="text-fuchsia-400">=</span> <span className="text-orange-400">-1n</span>;
-
-  <span className="text-slate-500">// Custom Epoch (Ví dụ: 2024-01-01)</span>
-  <span className="text-fuchsia-400">private readonly</span> twepoch <span className="text-fuchsia-400">=</span> <span className="text-orange-400">1704067200000n</span>; 
-  <span className="text-fuchsia-400">private readonly</span> workerIdBits <span className="text-fuchsia-400">=</span> <span className="text-orange-400">10n</span>;
-  <span className="text-fuchsia-400">private readonly</span> sequenceBits <span className="text-fuchsia-400">=</span> <span className="text-orange-400">12n</span>;
-
-  <span className="text-fuchsia-400">private readonly</span> sequenceMask <span className="text-fuchsia-400">=</span> <span className="text-orange-400">-1n</span> <span className="text-fuchsia-400">^</span> (<span className="text-orange-400">-1n</span> <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-indigo-400">this</span>.sequenceBits);
-
-  <span className="text-fuchsia-400">public</span> <span className="text-blue-400">nextId</span>()<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> {'{'}
-    <span className="text-fuchsia-400">let</span> timestamp <span className="text-fuchsia-400">=</span> <span className="text-amber-300">BigInt</span>(<span className="text-amber-300">Date</span>.<span className="text-blue-400">now</span>());
-
-    <span className="text-fuchsia-400">if</span> (timestamp <span className="text-fuchsia-400">===</span> <span className="text-indigo-400">this</span>.lastTimestamp) {'{'}
-      <span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">=</span> (<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">+</span> <span className="text-orange-400">1n</span>) <span className="text-fuchsia-400">&</span> <span className="text-indigo-400">this</span>.sequenceMask;
-      <span className="text-fuchsia-400">if</span> (<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">===</span> <span className="text-orange-400">0n</span>) {'{'}
-        <span className="text-slate-500">// Vượt quá 4096 ID/ms, chờ ms tiếp theo</span>
-        <span className="text-fuchsia-400">while</span> (timestamp <span className="text-fuchsia-400">&lt;=</span> <span className="text-indigo-400">this</span>.lastTimestamp) timestamp <span className="text-fuchsia-400">=</span> <span className="text-amber-300">BigInt</span>(<span className="text-amber-300">Date</span>.<span className="text-blue-400">now</span>());
-      {'}'}
-    {'}'} <span className="text-fuchsia-400">else</span> {'{'}
-      <span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">=</span> <span className="text-orange-400">0n</span>;
-    {'}'}
-
-    <span className="text-indigo-400">this</span>.lastTimestamp <span className="text-fuchsia-400">=</span> timestamp;
-
-    <span className="text-slate-500">// Bitwise shift để ghép thành số 64-bit hoàn chỉnh</span>
-    <span className="text-fuchsia-400">return</span> ((timestamp <span className="text-fuchsia-400">-</span> <span className="text-indigo-400">this</span>.twepoch) <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-orange-400">22n</span>) <span className="text-fuchsia-400">|</span>
-           (<span className="text-indigo-400">this</span>.workerId <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-orange-400">12n</span>) <span className="text-fuchsia-400">|</span>
-           <span className="text-indigo-400">this</span>.sequence;
-  {'}'}
-{'}'}
-            </code>
+            <code className="text-slate-300">{"\n"}
+<span className="text-fuchsia-400">class</span> <span className="text-amber-300">SnowflakeGenerator</span> {'{'}{"\n"}
+{"  "}<span className="text-fuchsia-400">private</span> workerId<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span>;{"\n"}
+{"  "}<span className="text-fuchsia-400">private</span> sequence<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> <span className="text-fuchsia-400">=</span> <span className="text-orange-400">0n</span>;{"\n"}
+{"  "}<span className="text-fuchsia-400">private</span> lastTimestamp<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> <span className="text-fuchsia-400">=</span> <span className="text-orange-400">-1n</span>;{"\n"}
+{"\n"}
+{"  "}<span className="text-slate-500">// Custom Epoch (Ví dụ: 2024-01-01)</span>{"\n"}
+{"  "}<span className="text-fuchsia-400">private readonly</span> twepoch <span className="text-fuchsia-400">=</span> <span className="text-orange-400">1704067200000n</span>; {"\n"}
+{"  "}<span className="text-fuchsia-400">private readonly</span> workerIdBits <span className="text-fuchsia-400">=</span> <span className="text-orange-400">10n</span>;{"\n"}
+{"  "}<span className="text-fuchsia-400">private readonly</span> sequenceBits <span className="text-fuchsia-400">=</span> <span className="text-orange-400">12n</span>;{"\n"}
+{"\n"}
+{"  "}<span className="text-fuchsia-400">private readonly</span> sequenceMask <span className="text-fuchsia-400">=</span> <span className="text-orange-400">-1n</span> <span className="text-fuchsia-400">^</span> (<span className="text-orange-400">-1n</span> <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-indigo-400">this</span>.sequenceBits);{"\n"}
+{"\n"}
+{"  "}<span className="text-fuchsia-400">public</span> <span className="text-blue-400">nextId</span>()<span className="text-slate-400">:</span> <span className="text-emerald-300">bigint</span> {'{'}{"\n"}
+{"    "}<span className="text-fuchsia-400">let</span> timestamp <span className="text-fuchsia-400">=</span> <span className="text-amber-300">BigInt</span>(<span className="text-amber-300">Date</span>.<span className="text-blue-400">now</span>());{"\n"}
+{"\n"}
+{"    "}<span className="text-fuchsia-400">if</span> (timestamp <span className="text-fuchsia-400">===</span> <span className="text-indigo-400">this</span>.lastTimestamp) {'{'}{"\n"}
+{"      "}<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">=</span> (<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">+</span> <span className="text-orange-400">1n</span>) <span className="text-fuchsia-400">&</span> <span className="text-indigo-400">this</span>.sequenceMask;{"\n"}
+{"      "}<span className="text-fuchsia-400">if</span> (<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">===</span> <span className="text-orange-400">0n</span>) {'{'}{"\n"}
+{"        "}<span className="text-slate-500">// Vượt quá 4096 ID/ms, chờ ms tiếp theo</span>{"\n"}
+{"        "}<span className="text-fuchsia-400">while</span> (timestamp <span className="text-fuchsia-400">&lt;=</span> <span className="text-indigo-400">this</span>.lastTimestamp) timestamp <span className="text-fuchsia-400">=</span> <span className="text-amber-300">BigInt</span>(<span className="text-amber-300">Date</span>.<span className="text-blue-400">now</span>());{"\n"}
+{"      "}{'}'}{"\n"}
+{"    "}{'}'} <span className="text-fuchsia-400">else</span> {'{'}{"\n"}
+{"      "}<span className="text-indigo-400">this</span>.sequence <span className="text-fuchsia-400">=</span> <span className="text-orange-400">0n</span>;{"\n"}
+{"    "}{'}'}{"\n"}
+{"\n"}
+{"    "}<span className="text-indigo-400">this</span>.lastTimestamp <span className="text-fuchsia-400">=</span> timestamp;{"\n"}
+{"\n"}
+{"    "}<span className="text-slate-500">// Bitwise shift để ghép thành số 64-bit hoàn chỉnh</span>{"\n"}
+{"    "}<span className="text-fuchsia-400">return</span> ((timestamp <span className="text-fuchsia-400">-</span> <span className="text-indigo-400">this</span>.twepoch) <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-orange-400">22n</span>) <span className="text-fuchsia-400">|</span>{"\n"}
+           (<span className="text-indigo-400">this</span>.workerId <span className="text-fuchsia-400">&lt;&lt;</span> <span className="text-orange-400">12n</span>) <span className="text-fuchsia-400">|</span>{"\n"}
+{"           "}<span className="text-indigo-400">this</span>.sequence;{"\n"}
+{"  "}{'}'}{"\n"}
+{'}'}{"\n"}
+            </code>{"\n"}
           </pre>
         </div>
       </div>

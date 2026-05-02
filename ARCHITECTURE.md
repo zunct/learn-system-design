@@ -61,18 +61,40 @@ Mỗi khi USER yêu cầu "Thêm một bài học mới" hoặc "Thêm case stud
 ## 7. Các Thành Phần/Bài Học Hiện Có (Current Features Map)
 Đây là danh sách các màn hình đã được hiện thực hoá để các Agent dễ dàng nắm bắt ngữ cảnh, tránh code trùng lặp:
 
-### Khởi Đầu (Basics)
+### Chương 1: Nhập môn
 - **`Introduction.jsx` (id: `intro`)**: Trang tổng quan, giới thiệu System Design là gì, tại sao phải học, và phân tích các Building Blocks cơ bản (Load Balancer, Cache, MQ...). Kèm Framework 4 bước để thiết kế hệ thống.
+- **`NetworkApis.jsx` (id: `network`)**: Giao tiếp & APIs
 
-### Khái Niệm Cốt Lõi (Core Concepts)
-- **`SoftwareArchitecture.jsx` (id: `arch`)**: Giải thích về Clean Architecture, Domain-Driven Design (DDD), nguyên tắc tách biệt Bounded Context, và Anti-patterns (hội chứng NIH, God Object).
+### Chương 2: Tăng tốc & Chịu tải
 - **`LoadBalancerDemo.jsx` (id: `lb`)**: Phân tích cơ chế của Cân bằng tải (Layer 4 vs Layer 7), các thuật toán (Round Robin, Least Connections) và minh hoạ tương tác.
+- **`CdnDemo.jsx` (id: `cdn`)**: Mạng lưới CDN
 - **`CachingDemo.jsx` (id: `cache`)**: Các chiến lược lưu trữ đệm (Cache Aside, Read Through, Write Through, Write Behind) và chiến lược loại bỏ (LRU, LFU).
-- **`DatabaseScaling.jsx` (id: `db`)**: Các phương pháp mở rộng CSDL như Replication (Master-Slave), Sharding, Partitioning và ưu nhược điểm.
-- **`MessageQueueDemo.jsx` (id: `mq`)**: Lý thuyết về xử lý bất đồng bộ, Pub/Sub, Kafka vs RabbitMQ, và cơ chế Decoupling (tách rời dịch vụ).
-- **`CapTheorem.jsx` (id: `cap`)**: Trình bày Định lý CAP (Consistency, Availability, Partition Tolerance), giải thích vì sao chỉ chọn được 2 trong 3 và ví dụ thực tế của các DB (MongoDB: CP, Cassandra: AP, RDBMS: CA).
 
-### Case Studies
+### Chương 3: Quản trị Dữ liệu
+- **`CapTheorem.jsx` (id: `cap`)**: Trình bày Định lý CAP (Consistency, Availability, Partition Tolerance), giải thích vì sao chỉ chọn được 2 trong 3 và ví dụ thực tế của các DB (MongoDB: CP, Cassandra: AP, RDBMS: CA).
+- **`DatabaseTypes.jsx` (id: `db-types`)**: Chọn Database nào?
+- **`DatabaseScaling.jsx` (id: `db`)**: Các phương pháp mở rộng CSDL như Replication (Master-Slave), Sharding, Partitioning và ưu nhược điểm.
+
+### Chương 4: Kiến trúc tổng thể
+- **`MessageQueueDemo.jsx` (id: `mq`)**: Lý thuyết về xử lý bất đồng bộ, Pub/Sub, Kafka vs RabbitMQ, và cơ chế Decoupling (tách rời dịch vụ).
+- **`SoftwareArchitecture.jsx` (id: `arch`)**: Giải thích về Clean Architecture, Domain-Driven Design (DDD), nguyên tắc tách biệt Bounded Context, và Anti-patterns (hội chứng NIH, God Object).
+- **`MicroservicesPatterns.jsx` (id: `microservices`)**: Microservices Patterns
+
+### Chương 5: Vận hành Hệ thống
+- **`ObservabilityDemo.jsx` (id: `observability`)**: Log, Metric & Trace
+- **`RateLimitingDemo.jsx` (id: `rate-limit`)**: Rate Limiting
+- **`DistributedAlgorithms.jsx` (id: `dist-algo`)**: Thuật toán Phân tán
+
+### Chương 6: Case Studies
 - **`UrlShortenerCaseStudy.jsx` (id: `url-shortener`)**: Bài toán thực tế thiết kế TinyURL. Bao gồm việc ước lượng tài nguyên (Capacity Planning), Database Schema, và thuật toán tạo Hash (Base62 vs MD5).
+- **`ChatAppCaseStudy.jsx` (id: `chat-app`)**: Hệ thống Chat (Zalo)
+- **`VideoStreamingCaseStudy.jsx` (id: `video-streaming`)**: Video Streaming (Netflix)
+- **`SaaSCaseStudy.jsx` (id: `saas-system`)**: Hệ thống SaaS (B2B)
+- **`TicketBookingCaseStudy.jsx` (id: `ticket-booking`)**: Flash Sale / Booking
+- **`LocationBasedCaseStudy.jsx` (id: `location-based`)**: Tìm kiếm Vị trí (Grab)
+- **`NewsFeedCaseStudy.jsx` (id: `news-feed`)**: News Feed (Facebook)
+- **`NotificationCaseStudy.jsx` (id: `notification`)**: Hệ thống Thông Báo
+- **`IdGeneratorCaseStudy.jsx` (id: `id-generator`)**: ID Phân tán (Snowflake)
+- **`SearchEngineCaseStudy.jsx` (id: `search-engine`)**: Search Engine (Elastic)
 
 *(Ghi chú: Khi tạo thêm bài học mới, hãy cập nhật danh sách này để các Agent đời sau có cái nhìn tổng quan nhất).*

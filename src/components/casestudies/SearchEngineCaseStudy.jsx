@@ -81,35 +81,35 @@ const SearchEngineCaseStudy = () => {
         
         <div className="space-y-6">
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+            <div className="px-4 py-3 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 gap-2">
               <span className="text-sm font-semibold text-slate-300 flex items-center gap-2">
                 <Code size={16} className="text-orange-400" /> 1. Cấu trúc Inverted Index (Chỉ mục ngược)
               </span>
               <span className="text-xs text-slate-500 font-mono">Data Structure</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-slate-500">{"// Tài liệu gốc (Documents)"}</span>
-<span className="text-orange-300">Doc 1:</span> <span className="text-green-300">"Apple iPhone 15 Pro Max"</span>
-<span className="text-orange-300">Doc 2:</span> <span className="text-green-300">"Apple Macbook Pro M3"</span>
-<span className="text-orange-300">Doc 3:</span> <span className="text-green-300">"Ốp lưng iPhone 15"</span>
-
-<span className="text-slate-500">{"// Inverted Index được xây dựng trong Elasticsearch / Lucene"}</span>
-<span className="text-pink-400">Term</span>        | <span className="text-pink-400">Document IDs (Posting List)</span>  | <span className="text-pink-400">Tần suất (TF)</span>
---------------------------------------------------------
-<span className="text-green-300">"apple"</span>     | <span className="text-blue-300">[1, 2]</span>                       | <span className="text-orange-300">2</span>
-<span className="text-green-300">"iphone"</span>    | <span className="text-blue-300">[1, 3]</span>                       | <span className="text-orange-300">2</span>
-<span className="text-green-300">"15"</span>        | <span className="text-blue-300">[1, 3]</span>                       | <span className="text-orange-300">2</span>
-<span className="text-green-300">"pro"</span>       | <span className="text-blue-300">[1, 2]</span>                       | <span className="text-orange-300">2</span>
-<span className="text-green-300">"max"</span>       | <span className="text-blue-300">[1]</span>                          | <span className="text-orange-300">1</span>
-<span className="text-green-300">"macbook"</span>   | <span className="text-blue-300">[2]</span>                          | <span className="text-orange-300">1</span>
-<span className="text-green-300">"m3"</span>        | <span className="text-blue-300">[2]</span>                          | <span className="text-orange-300">1</span>
-<span className="text-green-300">"ốp"</span>        | <span className="text-blue-300">[3]</span>                          | <span className="text-orange-300">1</span>
-<span className="text-green-300">"lưng"</span>      | <span className="text-blue-300">[3]</span>                          | <span className="text-orange-300">1</span>
-
-<span className="text-slate-500">{"// Khi Query tìm: \"Apple iPhone\""}</span>
-<span className="text-slate-500">{"// Hệ thống chỉ cần lấy Giao (Intersection) của 2 Posting Lists:"}</span>
-<span className="text-blue-400">Intersect</span>([<span className="text-orange-300">1, 2</span>], [<span className="text-orange-300">1, 3</span>]) = <span className="text-pink-400">Doc 1</span> <span className="text-slate-500">{"-> Độ phức tạp O(1)"}</span>
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-slate-500">{"// Tài liệu gốc (Documents)"}</span>{"\n"}
+<span className="text-orange-300">Doc 1:</span> <span className="text-green-300">"Apple iPhone 15 Pro Max"</span>{"\n"}
+<span className="text-orange-300">Doc 2:</span> <span className="text-green-300">"Apple Macbook Pro M3"</span>{"\n"}
+<span className="text-orange-300">Doc 3:</span> <span className="text-green-300">"Ốp lưng iPhone 15"</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"// Inverted Index (Từ -> Danh sách Document IDs)"}</span>{"\n"}
+<span className="text-pink-400">Term</span>        | <span className="text-pink-400">Document IDs (Posting List)</span>  | <span className="text-pink-400">Tần suất (TF)</span>{"\n"}
+--------------------------------------------------------{"\n"}
+<span className="text-green-300">"apple"</span>     | <span className="text-blue-300">[1, 2]</span>                       | <span className="text-orange-300">2</span>{"\n"}
+<span className="text-green-300">"iphone"</span>    | <span className="text-blue-300">[1, 3]</span>                       | <span className="text-orange-300">2</span>{"\n"}
+<span className="text-green-300">"15"</span>        | <span className="text-blue-300">[1, 3]</span>                       | <span className="text-orange-300">2</span>{"\n"}
+<span className="text-green-300">"pro"</span>       | <span className="text-blue-300">[1, 2]</span>                       | <span className="text-orange-300">2</span>{"\n"}
+<span className="text-green-300">"max"</span>       | <span className="text-blue-300">[1]</span>                          | <span className="text-orange-300">1</span>{"\n"}
+<span className="text-green-300">"macbook"</span>   | <span className="text-blue-300">[2]</span>                          | <span className="text-orange-300">1</span>{"\n"}
+<span className="text-green-300">"m3"</span>        | <span className="text-blue-300">[2]</span>                          | <span className="text-orange-300">1</span>{"\n"}
+<span className="text-green-300">"ốp"</span>        | <span className="text-blue-300">[3]</span>                          | <span className="text-orange-300">1</span>{"\n"}
+<span className="text-green-300">"lưng"</span>      | <span className="text-blue-300">[3]</span>                          | <span className="text-orange-300">1</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"// Khi Query tìm: \"Apple iPhone\""}</span>{"\n"}
+<span className="text-slate-500">{"// Hệ thống chỉ cần lấy Giao (Intersection) của 2 Posting Lists:"}</span>{"\n"}
+<span className="text-blue-400">Intersect</span>([<span className="text-orange-300">1, 2</span>], [<span className="text-orange-300">1, 3</span>]) = <span className="text-pink-400">Doc 1</span> <span className="text-slate-500">{"-> Độ phức tạp O(1)"}</span>{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400">
@@ -118,33 +118,33 @@ const SearchEngineCaseStudy = () => {
           </div>
 
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+            <div className="px-4 py-3 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 gap-2">
               <span className="text-sm font-semibold text-slate-300 flex items-center gap-2">
                 <Database size={16} className="text-indigo-400" /> 2. Elasticsearch Mapping & Text Analysis
               </span>
               <span className="text-xs text-slate-500 font-mono">JSON / Elastic</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-pink-400">PUT</span> <span className="text-blue-300">/products</span>
-{'{'}
-  <span className="text-green-300">"mappings"</span>: {'{'}
-    <span className="text-green-300">"properties"</span>: {'{'}
-      <span className="text-green-300">"title"</span>: {'{'}
-        <span className="text-green-300">"type"</span>: <span className="text-orange-300">"text"</span>,
-        <span className="text-green-300">"analyzer"</span>: <span className="text-orange-300">"standard"</span>, <span className="text-slate-500">{"// Phân tích văn bản: cắt từ, bỏ dấu..."}</span>
-        <span className="text-green-300">"fields"</span>: {'{'}
-          <span className="text-green-300">"keyword"</span>: {'{'} 
-            <span className="text-green-300">"type"</span>: <span className="text-orange-300">"keyword"</span> <span className="text-slate-500">{"// Dùng cho exact match và sắp xếp"}</span>
-          {'}'}
-        {'}'}
-      {'}'},
-      <span className="text-green-300">"price"</span>: {'{'}
-        <span className="text-green-300">"type"</span>: <span className="text-orange-300">"integer"</span> <span className="text-slate-500">{"// Dữ liệu số (B-K-D Tree index)"}</span>
-      {'}'}
-    {'}'}
-  {'}'}
-{'}'}
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-pink-400">PUT</span> <span className="text-blue-300">/products</span>{"\n"}
+{'{'}{"\n"}
+{"  "}<span className="text-green-300">"mappings"</span>: {'{'}{"\n"}
+{"    "}<span className="text-green-300">"properties"</span>: {'{'}{"\n"}
+{"      "}<span className="text-green-300">"title"</span>: {'{'}{"\n"}
+{"        "}<span className="text-green-300">"type"</span>: <span className="text-orange-300">"text"</span>,{"\n"}
+{"        "}<span className="text-green-300">"analyzer"</span>: <span className="text-orange-300">"standard"</span>, <span className="text-slate-500">{"// Phân tích văn bản: cắt từ, bỏ dấu..."}</span>{"\n"}
+{"        "}<span className="text-green-300">"fields"</span>: {'{'}{"\n"}
+{"          "}<span className="text-green-300">"keyword"</span>: {'{'} {"\n"}
+{"            "}<span className="text-green-300">"type"</span>: <span className="text-orange-300">"keyword"</span> <span className="text-slate-500">{"// Dùng cho exact match và sắp xếp"}</span>{"\n"}
+{"          "}{'}'}{"\n"}
+{"        "}{'}'}{"\n"}
+{"      "}{'}'},{"\n"}
+{"      "}<span className="text-green-300">"price"</span>: {'{'}{"\n"}
+{"        "}<span className="text-green-300">"type"</span>: <span className="text-orange-300">"integer"</span> <span className="text-slate-500">{"// Dữ liệu số (B-K-D Tree index)"}</span>{"\n"}
+{"      "}{'}'}{"\n"}
+{"    "}{'}'}{"\n"}
+{"  "}{'}'}{"\n"}
+{'}'}{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400 space-y-2">

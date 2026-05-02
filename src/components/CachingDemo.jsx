@@ -7,20 +7,26 @@ import CyberButton from './ui/CyberButton';
 const CachingDemo = () => {
   const [status, setStatus] = useState('idle'); // idle, checking, hit, miss, loading-db, success
   const [cacheData, setCacheData] = useState(false); // Does cache have data?
+  const [requestSpeed, setRequestSpeed] = useState(''); // 'fast' or 'slow'
 
   const fetchData = () => {
     setStatus('checking');
+    setRequestSpeed('');
     
     setTimeout(() => {
       if (cacheData) {
         setStatus('hit');
-        setTimeout(() => setStatus('success'), 1000);
+        setTimeout(() => {
+          setRequestSpeed('fast');
+          setStatus('success');
+        }, 1000);
       } else {
         setStatus('miss');
         setTimeout(() => {
           setStatus('loading-db');
           setTimeout(() => {
             setCacheData(true);
+            setRequestSpeed('slow');
             setStatus('success');
           }, 1500); // DB is slow
         }, 1000);
@@ -31,6 +37,7 @@ const CachingDemo = () => {
   const clearCache = () => {
     setCacheData(false);
     setStatus('idle');
+    setRequestSpeed('');
   };
 
   return (
@@ -139,10 +146,10 @@ const CachingDemo = () => {
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className={`px-4 py-2 rounded-lg font-bold flex items-center gap-2 ${cacheData && status === 'hit' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}`}
+                className={`px-4 py-2 rounded-lg font-bold flex items-center gap-2 ${requestSpeed === 'fast' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}`}
               >
                 <CheckCircle2 size={18} />
-                Request Complete {cacheData && status === 'hit' ? '(Speed: Fast ⚡)' : '(Speed: Slow 🐢)'}
+                Request Complete {requestSpeed === 'fast' ? '(Speed: Fast ⚡)' : '(Speed: Slow 🐢)'}
               </motion.div>
             )}
           </div>

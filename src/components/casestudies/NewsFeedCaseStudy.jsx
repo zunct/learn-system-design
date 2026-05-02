@@ -56,19 +56,19 @@ const NewsFeedCaseStudy = () => {
           </p>
           <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-slate-800">
 <pre>
-<code className="text-slate-300">
-<span className="text-slate-500">// Cấu trúc Redis Sorted Set (ZSET) cho feed của user_id = 1001</span><br/>
-<span className="text-fuchsia-400">Key:</span> <span className="text-emerald-300">feed:1001</span><br/>
-<span className="text-fuchsia-400">Score</span> (Timestamp)    <span className="text-fuchsia-400">Value</span> (Post ID)<br/>
-<span className="text-orange-400">1714521000</span>           <span className="text-indigo-300">post_99</span><br/>
-<span className="text-orange-400">1714521050</span>           <span className="text-indigo-300">post_102</span><br/>
-<br/>
-<span className="text-slate-500">// Lệnh thêm bài viết mới vào feed của bạn bè</span><br/>
-ZADD feed:1001 <span className="text-orange-400">1714521100</span> post_205<br/>
-<br/>
-<span className="text-slate-500">// Lệnh lấy 20 bài viết mới nhất cho News Feed</span><br/>
-ZREVRANGE feed:1001 <span className="text-orange-400">0</span> <span className="text-orange-400">19</span><br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-slate-500">// Cấu trúc Redis Sorted Set (ZSET) cho feed của user_id = 1001</span><br/>{"\n"}
+<span className="text-fuchsia-400">Key:</span> <span className="text-emerald-300">feed:1001</span><br/>{"\n"}
+<span className="text-fuchsia-400">Score</span> (Timestamp)    <span className="text-fuchsia-400">Value</span> (Post ID)<br/>{"\n"}
+<span className="text-orange-400">1714521000</span>           <span className="text-indigo-300">post_99</span><br/>{"\n"}
+<span className="text-orange-400">1714521050</span>           <span className="text-indigo-300">post_102</span><br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// Lệnh thêm bài viết mới vào feed của bạn bè</span><br/>{"\n"}
+ZADD feed:1001 <span className="text-orange-400">1714521100</span> post_205<br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// Lệnh lấy 20 bài viết mới nhất cho News Feed</span><br/>{"\n"}
+ZREVRANGE feed:1001 <span className="text-orange-400">0</span> <span className="text-orange-400">19</span><br/>{"\n"}
+</code>{"\n"}
 </pre>
           </div>
         </div>

@@ -56,23 +56,23 @@ const TicketBookingCaseStudy = () => {
           </p>
           <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-slate-800">
 <pre>
-<code className="text-slate-300">
-<span className="text-slate-500">-- KEYS[1]: flash_sale_inventory_key</span><br/>
-<span className="text-slate-500">-- ARGV[1]: user_id (để check trùng)</span><br/>
-<br/>
-<span className="text-fuchsia-400">if</span> redis.call(<span className="text-emerald-300">"SISMEMBER"</span>, <span className="text-emerald-300">"flash_sale_users"</span>, ARGV[<span className="text-orange-400">1</span>]) <span className="text-fuchsia-400">==</span> <span className="text-orange-400">1</span> <span className="text-fuchsia-400">then</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> <span className="text-orange-400">-1</span> <span className="text-slate-500">-- User đã mua rồi</span><br/>
-<span className="text-fuchsia-400">end</span><br/>
-<br/>
-<span className="text-fuchsia-400">local</span> stock = <span className="text-amber-300">tonumber</span>(redis.call(<span className="text-emerald-300">"GET"</span>, KEYS[<span className="text-orange-400">1</span>]))<br/>
-<span className="text-fuchsia-400">if</span> stock <span className="text-fuchsia-400">&lt;=</span> <span className="text-orange-400">0</span> <span className="text-fuchsia-400">then</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> <span className="text-orange-400">0</span> <span className="text-slate-500">-- Hết hàng</span><br/>
-<span className="text-fuchsia-400">end</span><br/>
-<br/>
-redis.call(<span className="text-emerald-300">"DECR"</span>, KEYS[<span className="text-orange-400">1</span>])<br/>
-redis.call(<span className="text-emerald-300">"SADD"</span>, <span className="text-emerald-300">"flash_sale_users"</span>, ARGV[<span className="text-orange-400">1</span>]) <span className="text-slate-500">-- Đánh dấu đã mua</span><br/>
-<span className="text-fuchsia-400">return</span> <span className="text-orange-400">1</span> <span className="text-slate-500">-- Mua thành công</span><br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-slate-500">-- KEYS[1]: flash_sale_inventory_key</span><br/>{"\n"}
+<span className="text-slate-500">-- ARGV[1]: user_id (để check trùng)</span><br/>{"\n"}
+<br/>{"\n"}
+<span className="text-fuchsia-400">if</span> redis.call(<span className="text-emerald-300">"SISMEMBER"</span>, <span className="text-emerald-300">"flash_sale_users"</span>, ARGV[<span className="text-orange-400">1</span>]) <span className="text-fuchsia-400">==</span> <span className="text-orange-400">1</span> <span className="text-fuchsia-400">then</span><br/>{"\n"}
+&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> <span className="text-orange-400">-1</span> <span className="text-slate-500">-- User đã mua rồi</span><br/>{"\n"}
+<span className="text-fuchsia-400">end</span><br/>{"\n"}
+<br/>{"\n"}
+<span className="text-fuchsia-400">local</span> stock = <span className="text-amber-300">tonumber</span>(redis.call(<span className="text-emerald-300">"GET"</span>, KEYS[<span className="text-orange-400">1</span>]))<br/>{"\n"}
+<span className="text-fuchsia-400">if</span> stock <span className="text-fuchsia-400">&lt;=</span> <span className="text-orange-400">0</span> <span className="text-fuchsia-400">then</span><br/>{"\n"}
+&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> <span className="text-orange-400">0</span> <span className="text-slate-500">-- Hết hàng</span><br/>{"\n"}
+<span className="text-fuchsia-400">end</span><br/>{"\n"}
+<br/>{"\n"}
+redis.call(<span className="text-emerald-300">"DECR"</span>, KEYS[<span className="text-orange-400">1</span>])<br/>{"\n"}
+redis.call(<span className="text-emerald-300">"SADD"</span>, <span className="text-emerald-300">"flash_sale_users"</span>, ARGV[<span className="text-orange-400">1</span>]) <span className="text-slate-500">-- Đánh dấu đã mua</span><br/>{"\n"}
+<span className="text-fuchsia-400">return</span> <span className="text-orange-400">1</span> <span className="text-slate-500">-- Mua thành công</span><br/>{"\n"}
+</code>{"\n"}
 </pre>
           </div>
         </div>

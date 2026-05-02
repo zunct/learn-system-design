@@ -86,31 +86,33 @@ const NotificationCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">JS / Retry Logic</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-pink-400">async function</span> <span className="text-blue-400">sendNotificationWithRetry</span>(<span className="text-orange-300">payload</span>, <span className="text-orange-300">maxRetries</span> = <span className="text-orange-300">5</span>) {'{'}
-  <span className="text-pink-400">let</span> attempt = <span className="text-orange-300">0</span>;
-  
-  <span className="text-pink-400">while</span> (attempt &lt; maxRetries) {'{'}
-    <span className="text-pink-400">try</span> {'{'}
-      <span className="text-slate-500">{"// Gọi API của Apple (APNs) hoặc Firebase (FCM)"}</span>
-      <span className="text-pink-400">return await</span> APNService.<span className="text-blue-400">send</span>(payload);
-    {'}'} <span className="text-pink-400">catch</span> (error) {'{'}
-      <span className="text-pink-400">if</span> (error.status === <span className="text-orange-300">429</span> || error.status &gt;= <span className="text-orange-300">500</span>) {'{'}
-        <span className="text-slate-500">{"// Tính thời gian chờ: 2^attempt * 100ms + Jitter (để tránh thundering herd)"}</span>
-        <span className="text-pink-400">const</span> baseDelay = Math.<span className="text-blue-400">pow</span>(<span className="text-orange-300">2</span>, attempt) * <span className="text-orange-300">100</span>;
-        <span className="text-pink-400">const</span> jitter = Math.<span className="text-blue-400">random</span>() * <span className="text-orange-300">50</span>; 
-        
-        <span className="text-pink-400">await</span> <span className="text-blue-400">sleep</span>(baseDelay + jitter);
-        attempt++;
-      {'}'} <span className="text-pink-400">else</span> {'{'}
-        <span className="text-slate-500">{"// Lỗi do payload sai (400), không retry"}</span>
-        <span className="text-pink-400">throw</span> error;
-      {'}'}
-    {'}'}
-  {'}'}
-  <span className="text-pink-400">throw new</span> <span className="text-blue-300">Error</span>(<span className="text-green-300">'Max retries exceeded'</span>);
-{'}'}
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-pink-400">async function</span> <span className="text-blue-400">sendNotificationWithRetry</span>(<span className="text-orange-300">payload</span>, <span className="text-orange-300">maxRetries</span> = <span className="text-orange-300">5</span>) {'{'}{"\n"}
+{"  "}<span className="text-pink-400">let</span> attempt = <span className="text-orange-300">0</span>;{"\n"}
+  {"\n"}
+{"  "}<span className="text-pink-400">while</span> (attempt &lt; maxRetries) {'{'}{"\n"}
+{"    "}<span className="text-pink-400">try</span> {'{'}{"\n"}
+{"      "}<span className="text-slate-500">{"// Gọi API của Apple (APNs)"}</span>{"\n"}
+{"      "}<span className="text-slate-500">{"// hoặc Firebase (FCM)"}</span>{"\n"}
+{"      "}<span className="text-pink-400">return await</span> APNService.<span className="text-blue-400">send</span>(payload);{"\n"}
+{"    "}{'}'} <span className="text-pink-400">catch</span> (error) {'{'}{"\n"}
+{"      "}<span className="text-pink-400">if</span> (error.status === <span className="text-orange-300">429</span> || error.status &gt;= <span className="text-orange-300">500</span>) {'{'}{"\n"}
+{"        "}<span className="text-slate-500">{"// Tính thời gian chờ: 2^attempt * 100ms"}</span>{"\n"}
+{"        "}<span className="text-slate-500">{"// + Jitter (để tránh thundering herd)"}</span>{"\n"}
+{"        "}<span className="text-pink-400">const</span> baseDelay = Math.<span className="text-blue-400">pow</span>(<span className="text-orange-300">2</span>, attempt) * <span className="text-orange-300">100</span>;{"\n"}
+{"        "}<span className="text-pink-400">const</span> jitter = Math.<span className="text-blue-400">random</span>() * <span className="text-orange-300">50</span>; {"\n"}
+        {"\n"}
+{"        "}<span className="text-pink-400">await</span> <span className="text-blue-400">sleep</span>(baseDelay + jitter);{"\n"}
+        attempt++;{"\n"}
+{"      "}{'}'} <span className="text-pink-400">else</span> {'{'}{"\n"}
+{"        "}<span className="text-slate-500">{"// Lỗi do payload sai (400), không retry"}</span>{"\n"}
+{"        "}<span className="text-pink-400">throw</span> error;{"\n"}
+{"      "}{'}'}{"\n"}
+{"    "}{'}'}{"\n"}
+{"  "}{'}'}{"\n"}
+{"  "}<span className="text-pink-400">throw new</span> <span className="text-blue-300">Error</span>(<span className="text-green-300">'Max retries exceeded'</span>);{"\n"}
+{'}'}{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400">
@@ -125,24 +127,28 @@ const NotificationCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">Redis Commands</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-slate-500">{"// 1. Tạo Idempotency Key duy nhất cho event và user"}</span>
-<span className="text-pink-400">const</span> idempotencyKey = <span className="text-green-300">`noti:order_1234:user_5678`</span>;
-
-<span className="text-slate-500">{"// 2. SETNX (Set if Not Exists) - Trả về 1 nếu set thành công, 0 nếu key đã có"}</span>
-<span className="text-pink-400">const</span> isFirstTime = <span className="text-pink-400">await</span> redis.<span className="text-blue-400">setnx</span>(idempotencyKey, <span className="text-green-300">'processing'</span>);
-
-<span className="text-pink-400">if</span> (isFirstTime === <span className="text-orange-300">1</span>) {'{'}
-  <span className="text-slate-500">{"// Đặt thời gian hết hạn là 24h để tiết kiệm bộ nhớ"}</span>
-  <span className="text-pink-400">await</span> redis.<span className="text-blue-400">expire</span>(idempotencyKey, <span className="text-orange-300">86400</span>);
-  
-  <span className="text-slate-500">{"// Tiến hành gửi thông báo"}</span>
-  <span className="text-pink-400">await</span> <span className="text-blue-400">sendPushNotification</span>(payload);
-{'}'} <span className="text-pink-400">else</span> {'{'}
-  <span className="text-slate-500">{"// Bỏ qua vì thông báo này đang hoặc đã được gửi rồi"}</span>
-  <span className="text-blue-400">console.log</span>(<span className="text-green-300">"Duplicate notification dropped"</span>);
-{'}'}
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-slate-500">{"// 1. Tạo Idempotency Key duy nhất"}</span>{"\n"}
+<span className="text-slate-500">{"//    cho event và user"}</span>{"\n"}
+<span className="text-pink-400">const</span> idempotencyKey = <span className="text-green-300">`noti:order_1234:user_5678`</span>;{"\n"}
+{"\n"}
+<span className="text-slate-500">{"// 2. SETNX (Set if Not Exists) - Trả về 1"}</span>{"\n"}
+<span className="text-slate-500">{"//    nếu thành công, 0 nếu key đã có"}</span>{"\n"}
+<span className="text-pink-400">const</span> isFirstTime = <span className="text-pink-400">await</span> redis.<span className="text-blue-400">setnx</span>(idempotencyKey, <span className="text-green-300">'processing'</span>);{"\n"}
+{"\n"}
+<span className="text-pink-400">if</span> (isFirstTime === <span className="text-orange-300">1</span>) {'{'}{"\n"}
+{"  "}<span className="text-slate-500">{"// Đặt thời gian hết hạn là 24h"}</span>{"\n"}
+{"  "}<span className="text-slate-500">{"// để tiết kiệm bộ nhớ"}</span>{"\n"}
+{"  "}<span className="text-pink-400">await</span> redis.<span className="text-blue-400">expire</span>(idempotencyKey, <span className="text-orange-300">86400</span>);{"\n"}
+  {"\n"}
+{"  "}<span className="text-slate-500">{"// Tiến hành gửi thông báo"}</span>{"\n"}
+{"  "}<span className="text-pink-400">await</span> <span className="text-blue-400">sendPushNotification</span>(payload);{"\n"}
+{'}'} <span className="text-pink-400">else</span> {'{'}{"\n"}
+{"  "}<span className="text-slate-500">{"// Bỏ qua vì thông báo này"}</span>{"\n"}
+{"  "}<span className="text-slate-500">{"// đang hoặc đã được gửi rồi"}</span>{"\n"}
+{"  "}<span className="text-blue-400">console.log</span>(<span className="text-green-300">"Duplicate notification dropped"</span>);{"\n"}
+{'}'}{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400 space-y-2">

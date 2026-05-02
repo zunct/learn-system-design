@@ -95,18 +95,18 @@ const LocationBasedCaseStudy = () => {
 
             <div className="w-full md:w-1/2 bg-slate-950 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-slate-800 flex flex-col justify-center">
 <pre>
-<code className="text-slate-300">
-<span className="text-slate-500">// Ví dụ tọa độ Hồ Chí Minh: 10.76, 106.66</span><br/>
-<span className="text-fuchsia-400">Lat:</span> 10.762622  <span className="text-fuchsia-400">Lng:</span> 106.660172<br/>
-<br/>
-<span className="text-slate-500">// Geohash Length = 6 (~1.2km)</span><br/>
-<span className="text-amber-300">Hash:</span> w3gtpd<br/>
-<br/>
-<span className="text-slate-500">// Tìm tài xế xung quanh ta dùng SQL:</span><br/>
-<span className="text-fuchsia-400">SELECT</span> * <span className="text-fuchsia-400">FROM</span> Drivers <br/>
-<span className="text-fuchsia-400">WHERE</span> geohash <span className="text-fuchsia-400">LIKE</span> <span className="text-emerald-300">'w3gtpd%'</span>;<br/>
-<span className="text-slate-500">// (Tận dụng B-Tree Index siêu tốc O(log N))</span><br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-slate-500">// Ví dụ tọa độ Hồ Chí Minh: 10.76, 106.66</span><br/>{"\n"}
+<span className="text-fuchsia-400">Lat:</span> 10.762622  <span className="text-fuchsia-400">Lng:</span> 106.660172<br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// Geohash Length = 6 (~1.2km)</span><br/>{"\n"}
+<span className="text-amber-300">Hash:</span> w3gtpd<br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// Tìm tài xế xung quanh ta dùng SQL:</span><br/>{"\n"}
+<span className="text-fuchsia-400">SELECT</span> * <span className="text-fuchsia-400">FROM</span> Drivers <br/>{"\n"}
+<span className="text-fuchsia-400">WHERE</span> geohash <span className="text-fuchsia-400">LIKE</span> <span className="text-emerald-300">'w3gtpd%'</span>;<br/>{"\n"}
+<span className="text-slate-500">// (Tận dụng B-Tree Index siêu tốc O(log N))</span><br/>{"\n"}
+</code>{"\n"}
 </pre>
             </div>
           </div>
@@ -123,18 +123,18 @@ const LocationBasedCaseStudy = () => {
           </p>
           <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm border border-slate-800 text-slate-300 overflow-x-auto">
 <pre>
-<code className="text-slate-300">
-<span className="text-slate-500">// 1. Tài xế (driver_99) cập nhật vị trí mỗi 3 giây</span><br/>
-GEOADD online_drivers <span className="text-orange-400">106.660172</span> <span className="text-orange-400">10.762622</span> <span className="text-indigo-300">"driver_99"</span><br/>
-<br/>
-<span className="text-slate-500">// 2. Khách hàng tìm tài xế quanh tọa độ của mình (bán kính 3km)</span><br/>
-GEORADIUS online_drivers <span className="text-orange-400">106.661000</span> <span className="text-orange-400">10.763000</span> <span className="text-orange-400">3</span> km WITHDIST ASC LIMIT 5<br/>
-<br/>
-<span className="text-slate-500">// 3. Kết quả trả về ngay trong Memory (cực nhanh)</span><br/>
-<span className="text-slate-500">1) "driver_99"   (0.5 km)</span><br/>
-<span className="text-slate-500">2) "driver_12"   (1.2 km)</span><br/>
-<span className="text-slate-500">...</span><br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-slate-500">// 1. Tài xế (driver_99) cập nhật vị trí mỗi 3 giây</span><br/>{"\n"}
+GEOADD online_drivers <span className="text-orange-400">106.660172</span> <span className="text-orange-400">10.762622</span> <span className="text-indigo-300">"driver_99"</span><br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// 2. Khách hàng tìm tài xế quanh tọa độ của mình (bán kính 3km)</span><br/>{"\n"}
+GEORADIUS online_drivers <span className="text-orange-400">106.661000</span> <span className="text-orange-400">10.763000</span> <span className="text-orange-400">3</span> km WITHDIST ASC LIMIT 5<br/>{"\n"}
+<br/>{"\n"}
+<span className="text-slate-500">// 3. Kết quả trả về ngay trong Memory (cực nhanh)</span><br/>{"\n"}
+<span className="text-slate-500">1) "driver_99"   (0.5 km)</span><br/>{"\n"}
+<span className="text-slate-500">2) "driver_12"   (1.2 km)</span><br/>{"\n"}
+<span className="text-slate-500">...</span><br/>{"\n"}
+</code>{"\n"}
 </pre>
           </div>
         </div>

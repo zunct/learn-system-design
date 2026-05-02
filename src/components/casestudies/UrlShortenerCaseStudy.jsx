@@ -195,17 +195,17 @@ const UrlShortenerCaseStudy = () => {
           </p>
           <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-slate-800">
 <pre>
-<code className="text-slate-300">
-<span className="text-fuchsia-400">const</span> BASE62 <span className="text-fuchsia-400">=</span> <span className="text-emerald-300">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>;<br/><br/>
-<span className="text-fuchsia-400">function</span> <span className="text-blue-400">encodeIdToBase62</span>(id) {'{'}<br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">let</span> shortUrl <span className="text-fuchsia-400">=</span> <span className="text-emerald-300">""</span>;<br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">while</span> (id <span className="text-fuchsia-400">&gt;</span> <span className="text-orange-400">0</span>) {'{'}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;shortUrl <span className="text-fuchsia-400">=</span> BASE62[id <span className="text-fuchsia-400">%</span> <span className="text-orange-400">62</span>] <span className="text-fuchsia-400">+</span> shortUrl;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;id <span className="text-fuchsia-400">=</span> <span className="text-amber-300">Math</span>.<span className="text-blue-400">floor</span>(id <span className="text-fuchsia-400">/</span> <span className="text-orange-400">62</span>);<br/>
-&nbsp;&nbsp;{'}'}<br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> shortUrl;<br/>
-{'}'}<br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-fuchsia-400">const</span> BASE62 <span className="text-fuchsia-400">=</span> <span className="text-emerald-300">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>;<br/><br/>{"\n"}
+<span className="text-fuchsia-400">function</span> <span className="text-blue-400">encodeIdToBase62</span>(id) {'{'}<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">let</span> shortUrl <span className="text-fuchsia-400">=</span> <span className="text-emerald-300">""</span>;<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">while</span> (id <span className="text-fuchsia-400">&gt;</span> <span className="text-orange-400">0</span>) {'{'}<br/>{"\n"}
+&nbsp;&nbsp;&nbsp;&nbsp;shortUrl <span className="text-fuchsia-400">=</span> BASE62[id <span className="text-fuchsia-400">%</span> <span className="text-orange-400">62</span>] <span className="text-fuchsia-400">+</span> shortUrl;<br/>{"\n"}
+&nbsp;&nbsp;&nbsp;&nbsp;id <span className="text-fuchsia-400">=</span> <span className="text-amber-300">Math</span>.<span className="text-blue-400">floor</span>(id <span className="text-fuchsia-400">/</span> <span className="text-orange-400">62</span>);<br/>{"\n"}
+&nbsp;&nbsp;{'}'}<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> shortUrl;<br/>{"\n"}
+{'}'}<br/>{"\n"}
+</code>{"\n"}
 </pre>
           </div>
         </div>
@@ -222,13 +222,13 @@ const UrlShortenerCaseStudy = () => {
             </p>
             <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm border border-slate-800 text-indigo-300">
 <pre>
-{`{
-  "short_url": "4c92",      // Partition Key
-  "long_url": "https://...",
-  "created_at": 1714521000,
-  "user_id": "usr_99",
-  "click_count": 150
-}`}
+{`{{"\n"}
+  "short_url": "4c92",      // Partition Key{"\n"}
+  "long_url": "https://...",{"\n"}
+  "created_at": 1714521000,{"\n"}
+  "user_id": "usr_99",{"\n"}
+  "click_count": 150{"\n"}
+}`}{"\n"}
 </pre>
             </div>
           </div>
@@ -243,17 +243,17 @@ const UrlShortenerCaseStudy = () => {
             </p>
             <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm overflow-x-auto border border-slate-800">
 <pre>
-<code className="text-slate-300">
-<span className="text-slate-500">// Cache Miss -{'>'} Query DB -{'>'} Set Cache</span><br/>
-<span className="text-fuchsia-400">const</span> longUrl = <span className="text-fuchsia-400">await</span> redis.<span className="text-blue-400">get</span>(<span className="text-emerald-300">`url:${'{shortUrl}'}`</span>);<br/>
-<br/>
-<span className="text-fuchsia-400">if</span> (!longUrl) {'{'}<br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">const</span> dbRecord = <span className="text-fuchsia-400">await</span> db.<span className="text-blue-400">findOne</span>({'{'} shortUrl {'}'});<br/>
-&nbsp;&nbsp;<span className="text-slate-500">// Cache 24h</span><br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">await</span> redis.<span className="text-blue-400">setex</span>(<span className="text-emerald-300">\`url:\${shortUrl}\`</span>, <span className="text-orange-400">86400</span>, dbRecord.longUrl);<br/>
-&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> dbRecord.longUrl;<br/>
-{'}'}<br/>
-</code>
+<code className="text-slate-300">{"\n"}
+<span className="text-slate-500">// Cache Miss -{'>'} Query DB -{'>'} Set Cache</span><br/>{"\n"}
+<span className="text-fuchsia-400">const</span> longUrl = <span className="text-fuchsia-400">await</span> redis.<span className="text-blue-400">get</span>(<span className="text-emerald-300">`url:${'{shortUrl}'}`</span>);<br/>{"\n"}
+<br/>{"\n"}
+<span className="text-fuchsia-400">if</span> (!longUrl) {'{'}<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">const</span> dbRecord = <span className="text-fuchsia-400">await</span> db.<span className="text-blue-400">findOne</span>({'{'} shortUrl {'}'});<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-slate-500">// Cache 24h</span><br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">await</span> redis.<span className="text-blue-400">setex</span>(<span className="text-emerald-300">\`url:\${shortUrl}\`</span>, <span className="text-orange-400">86400</span>, dbRecord.longUrl);<br/>{"\n"}
+&nbsp;&nbsp;<span className="text-fuchsia-400">return</span> dbRecord.longUrl;<br/>{"\n"}
+{'}'}<br/>{"\n"}
+</code>{"\n"}
 </pre>
             </div>
           </div>

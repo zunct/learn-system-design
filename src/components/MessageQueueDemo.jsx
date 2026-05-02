@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, FileText, Server, Cpu, Activity, Info } from 'lucide-react';
+import { Send, FileText, Server, Cpu, Activity, Info, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GlowingCard from './ui/GlowingCard';
 import CyberButton from './ui/CyberButton';
@@ -149,6 +149,79 @@ const MessageQueueDemo = () => {
           
         </div>
       </GlowingCard>
+
+      {/* Kiến thức chuyên sâu */}
+      <div className="grid md:grid-cols-2 gap-6 mt-8">
+        {/* Patterns */}
+        <GlowingCard className="bg-slate-900/50 p-6">
+          <h3 className="text-xl font-bold text-sky-400 mb-4 flex items-center gap-2">
+            <Layers size={20} /> Mô hình hoạt động (Patterns)
+          </h3>
+          <ul className="space-y-4 text-slate-300 text-sm">
+            <li className="p-3 bg-slate-950 rounded-lg border border-slate-800">
+              <strong className="text-emerald-400 block mb-1">Point-to-Point (Queue)</strong>
+              Mỗi tin nhắn chỉ được tiêu thụ bởi <strong>một</strong> Consumer duy nhất. Phù hợp để chia nhỏ và phân tán công việc (ví dụ: Xử lý video, Gửi Email). Nếu có nhiều Worker, tin nhắn sẽ được chia đều (Round-robin) giúp cân bằng tải.
+            </li>
+            <li className="p-3 bg-slate-950 rounded-lg border border-slate-800">
+              <strong className="text-purple-400 block mb-1">Publish/Subscribe (Topic/Fan-out)</strong>
+              Một tin nhắn (Event) được Broadcast tới <strong>nhiều</strong> Subscriber (Consumer) khác nhau. Phù hợp khi một sự kiện xảy ra cần báo cho nhiều hệ thống (ví dụ: User đặt hàng thành công -&gt; Báo cho Kho hàng, Vận chuyển, và Kế toán).
+            </li>
+          </ul>
+        </GlowingCard>
+
+        {/* Kafka vs RabbitMQ */}
+        <GlowingCard className="bg-slate-900/50 p-6">
+          <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+            <Server size={20} /> Kafka vs RabbitMQ
+          </h3>
+          <div className="space-y-4 text-slate-300 text-sm">
+            <div className="flex gap-4 p-3 bg-slate-950 rounded-lg border border-slate-800">
+              <div className="w-12 h-12 bg-orange-900/30 rounded-lg flex items-center justify-center shrink-0 border border-orange-500/50 text-orange-400 font-bold text-[10px]">Rabbit</div>
+              <div>
+                <strong className="text-white block mb-1">RabbitMQ (Smart Broker)</strong>
+                <ul className="text-slate-400 space-y-1">
+                  <li>• Broker tự nhớ ai đã đọc tin nào (xóa tin sau khi đọc).</li>
+                  <li>• Hỗ trợ định tuyến (Routing) phức tạp, có thứ tự ưu tiên.</li>
+                  <li>• <strong>Dùng cho:</strong> Các Background Job truyền thống, xử lý thanh toán.</li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex gap-4 p-3 bg-slate-950 rounded-lg border border-slate-800">
+              <div className="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center shrink-0 border border-slate-400 text-slate-800 font-bold text-[10px]">Kafka</div>
+              <div>
+                <strong className="text-white block mb-1">Apache Kafka (Smart Consumer)</strong>
+                <ul className="text-slate-400 space-y-1">
+                  <li>• Lưu tin vào đĩa cứng (Log append), không tự xóa. Giữ lại nhiều ngày.</li>
+                  <li>• Thông lượng cực khủng, cho phép Consumer "Tua lại" (Replay) dữ liệu.</li>
+                  <li>• <strong>Dùng cho:</strong> Stream Processing, Tracking User Activity.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </GlowingCard>
+
+        {/* Core Concepts */}
+        <GlowingCard className="bg-slate-900/50 p-6 md:col-span-2">
+          <h3 className="text-xl font-bold text-rose-400 mb-4 flex items-center gap-2">
+            <Activity size={20} /> Tại sao các Hệ thống lớn bắt buộc phải có Message Queue?
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+            <div className="p-4 bg-slate-950 rounded-lg border border-slate-800">
+              <strong className="text-white block text-base mb-2">1. Decoupling (Tách rời)</strong>
+              <p className="text-slate-400">Các Microservices không cần biết tới sự tồn tại của nhau. Dịch vụ Email bị sập? Không sao, dịch vụ Đặt hàng vẫn hoạt động, tin nhắn gửi Email sẽ nằm chờ ở Queue tới khi Email sống lại.</p>
+            </div>
+            <div className="p-4 bg-slate-950 rounded-lg border border-slate-800">
+              <strong className="text-white block text-base mb-2">2. Asynchronous (Bất đồng bộ)</strong>
+              <p className="text-slate-400">Không bắt User phải chờ một tác vụ nặng hoàn thành (như upload video). Hệ thống nhận lệnh, báo "Thành công" lập tức, còn việc render video cứ từ từ ném cho Worker chạy ngầm.</p>
+            </div>
+            <div className="p-4 bg-slate-950 rounded-lg border border-slate-800">
+              <strong className="text-white block text-base mb-2">3. Spike Smoothing (Chống sốc)</strong>
+              <p className="text-slate-400">Vào giờ vàng Flash Sale, 1 triệu người mua hàng cùng lúc. Thay vì gọi thẳng vào Database làm sập DB, mọi request mua hàng sẽ chui vào Queue. Database sẽ ung dung rút từng tin ra để xử lý.</p>
+            </div>
+          </div>
+        </GlowingCard>
+      </div>
+
     </div>
   );
 };

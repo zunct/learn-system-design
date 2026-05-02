@@ -92,26 +92,26 @@ const VideoStreamingCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">.m3u8 Playlist</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-slate-500">{"#EXTM3U"}</span>
-<span className="text-slate-500">{"#EXT-X-VERSION:3"}</span>
-<span className="text-slate-500">{"#EXT-X-TARGETDURATION:10"}</span>
-<span className="text-slate-500">{"#EXT-X-MEDIA-SEQUENCE:0"}</span>
-
-<span className="text-slate-500">{"# Lát cắt 1 (Chunk 1) - dài 10 giây"}</span>
-<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">10.000</span>,
-<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_000.ts</span>
-
-<span className="text-slate-500">{"# Lát cắt 2 (Chunk 2) - dài 10 giây"}</span>
-<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">10.000</span>,
-<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_001.ts</span>
-
-<span className="text-slate-500">{"# Lát cắt 3 (Chunk 3) - dài 5.5 giây (đoạn kết)"}</span>
-<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">5.500</span>,
-<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_002.ts</span>
-
-<span className="text-slate-500">{"#EXT-X-ENDLIST"}</span>
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-slate-500">{"#EXTM3U"}</span>{"\n"}
+<span className="text-slate-500">{"#EXT-X-VERSION:3"}</span>{"\n"}
+<span className="text-slate-500">{"#EXT-X-TARGETDURATION:10"}</span>{"\n"}
+<span className="text-slate-500">{"#EXT-X-MEDIA-SEQUENCE:0"}</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"# Lát cắt 1 (Chunk 1) - dài 10 giây"}</span>{"\n"}
+<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">10.000</span>,{"\n"}
+<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_000.ts</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"# Lát cắt 2 (Chunk 2) - dài 10 giây"}</span>{"\n"}
+<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">10.000</span>,{"\n"}
+<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_001.ts</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"# Lát cắt 3 (Chunk 3) - dài 5.5 giây (đoạn kết)"}</span>{"\n"}
+<span className="text-pink-400">#EXTINF</span>:<span className="text-orange-300">5.500</span>,{"\n"}
+<span className="text-blue-300">https://cdn.example.com/video123/1080p/chunk_002.ts</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"#EXT-X-ENDLIST"}</span>{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400 space-y-2">
@@ -127,22 +127,22 @@ const VideoStreamingCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">Architecture</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-pink-400">TABLE</span> <span className="text-blue-300">videos</span> (Metadata DB - MySQL / PostgreSQL)
---------------------------------------------------
-<span className="text-orange-300">id</span>          : <span className="text-green-300">"v_12345"</span>
-<span className="text-orange-300">title</span>       : <span className="text-green-300">"System Design Interview"</span>
-<span className="text-orange-300">author_id</span>   : <span className="text-green-300">"u_999"</span>
-<span className="text-orange-300">status</span>      : <span className="text-green-300">"READY"</span>
-<span className="text-orange-300">views</span>       : <span className="text-orange-300">1500000</span>
-<span className="text-orange-300">playlist_url</span>: <span className="text-green-300">"https://s3.aws.com/bucket/v_12345/master.m3u8"</span>
-
-<span className="text-slate-500">{"// Database chỉ lưu Metadata cực nhẹ. Còn file nặng lưu trên S3 (Blob Storage)"}</span>
-<span className="text-slate-500">{"// Quá trình Upload gốc:"}</span>
-<span className="text-pink-400">1.</span> Client xin URL upload tạm thời (Pre-signed URL) từ API Server.
-<span className="text-pink-400">2.</span> Client đẩy thẳng file mp4 nặng 2GB lên Amazon S3 (không đi qua API Server để tránh sập).
-<span className="text-pink-400">3.</span> S3 bắn Event qua Message Queue. Worker Nodes nhận Event và bắt đầu chuyển đổi (Encode) video.
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-pink-400">TABLE</span> <span className="text-blue-300">videos</span> (Metadata DB - MySQL / PostgreSQL){"\n"}
+--------------------------------------------------{"\n"}
+<span className="text-orange-300">id</span>          : <span className="text-green-300">"v_12345"</span>{"\n"}
+<span className="text-orange-300">title</span>       : <span className="text-green-300">"System Design Interview"</span>{"\n"}
+<span className="text-orange-300">author_id</span>   : <span className="text-green-300">"u_999"</span>{"\n"}
+<span className="text-orange-300">status</span>      : <span className="text-green-300">"READY"</span>{"\n"}
+<span className="text-orange-300">views</span>       : <span className="text-orange-300">1500000</span>{"\n"}
+<span className="text-orange-300">playlist_url</span>: <span className="text-green-300">"https://s3.aws.com/bucket/v_12345/master.m3u8"</span>{"\n"}
+{"\n"}
+<span className="text-slate-500">{"// Database chỉ lưu Metadata cực nhẹ. Còn file nặng lưu trên S3 (Blob Storage)"}</span>{"\n"}
+<span className="text-slate-500">{"// Quá trình Upload gốc:"}</span>{"\n"}
+<span className="text-pink-400">1.</span> Client xin URL upload tạm thời (Pre-signed URL) từ API Server.{"\n"}
+<span className="text-pink-400">2.</span> Client đẩy thẳng file mp4 nặng 2GB lên Amazon S3 (không đi qua API Server để tránh sập).{"\n"}
+<span className="text-pink-400">3.</span> S3 bắn Event qua Message Queue. Worker Nodes nhận Event và bắt đầu chuyển đổi (Encode) video.{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400 space-y-2">

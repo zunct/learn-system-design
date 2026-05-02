@@ -217,32 +217,35 @@ const ChatAppCaseStudy = () => {
         
         <div className="space-y-6">
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+            <div className="px-4 py-3 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 gap-2">
               <span className="text-sm font-semibold text-slate-300 flex items-center gap-2">
                 <Code size={16} className="text-blue-400" /> 1. WebSocket & Heartbeat (Node.js)
               </span>
               <span className="text-xs text-slate-500 font-mono">socket.io / redis</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-pink-400">io</span>.<span className="text-blue-400">on</span>(<span className="text-green-300">'connection'</span>, (<span className="text-orange-300">socket</span>) <span className="text-pink-400">=&gt;</span> {'{'}
-  <span className="text-slate-500">{"// 1. Lưu trạng thái Online vào Redis với TTL (Time-to-Live) = 30s"}</span>
-  <span className="text-pink-400">const</span> userId = socket.handshake.query.userId;
-  <span className="text-pink-400">await</span> redis.setex(<span className="text-green-300">`presence:<span className="text-blue-300">${'{userId}'}</span>`</span>, <span className="text-orange-300">30</span>, <span className="text-green-300">'online'</span>);
-
-  <span className="text-slate-500">{"// 2. Client gửi Heartbeat ('ping') mỗi 10s để gia hạn trạng thái Online"}</span>
-  socket.<span className="text-blue-400">on</span>(<span className="text-green-300">'ping'</span>, <span className="text-pink-400">async</span> () <span className="text-pink-400">=&gt;</span> {'{'}
-    <span className="text-pink-400">await</span> redis.expire(<span className="text-green-300">`presence:<span className="text-blue-300">${'{userId}'}</span>`</span>, <span className="text-orange-300">30</span>);
-  {'});'}
-
-  <span className="text-slate-500">{"// 3. Lắng nghe tin nhắn mới & đẩy vào Message Queue"}</span>
-  socket.<span className="text-blue-400">on</span>(<span className="text-green-300">'sendMessage'</span>, <span className="text-pink-400">async</span> (<span className="text-orange-300">msg</span>) <span className="text-pink-400">=&gt;</span> {'{'}
-    <span className="text-pink-400">await</span> kafka.send({'{'}
-      topic: <span className="text-green-300">'chat_messages'</span>,
-      messages: [JSON.stringify(msg)]
-    {'}'});
-  {'});'}
-{'});'}
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-pink-400">io</span>.<span className="text-blue-400">on</span>(<span className="text-green-300">'connection'</span>, (<span className="text-orange-300">socket</span>) <span className="text-pink-400">=&gt;</span> {'{'}{"\n"}
+{"  "}<span className="text-slate-500">{"// 1. Lưu trạng thái Online vào Redis"}</span>{"\n"}
+{"  "}<span className="text-slate-500">{"//    với TTL (Time-to-Live) = 30s"}</span>{"\n"}
+{"  "}<span className="text-pink-400">const</span> userId = socket.handshake.query.userId;{"\n"}
+{"  "}<span className="text-pink-400">await</span> redis.setex(<span className="text-green-300">`presence:<span className="text-blue-300">${'{userId}'}</span>`</span>, <span className="text-orange-300">30</span>, <span className="text-green-300">'online'</span>);{"\n"}
+{"\n"}
+{"  "}<span className="text-slate-500">{"// 2. Client gửi Heartbeat ('ping') mỗi 10s"}</span>{"\n"}
+{"  "}<span className="text-slate-500">{"//    để gia hạn trạng thái Online"}</span>{"\n"}
+  socket.<span className="text-blue-400">on</span>(<span className="text-green-300">'ping'</span>, <span className="text-pink-400">async</span> () <span className="text-pink-400">=&gt;</span> {'{'}{"\n"}
+{"    "}<span className="text-pink-400">await</span> redis.expire(<span className="text-green-300">`presence:<span className="text-blue-300">${'{userId}'}</span>`</span>, <span className="text-orange-300">30</span>);{"\n"}
+{"  "}{'});'}{"\n"}
+{"\n"}
+{"  "}<span className="text-slate-500">{"// 3. Lắng nghe tin nhắn mới & đẩy"}</span>{"\n"}
+{"  "}<span className="text-slate-500">{"//    vào Message Queue (Kafka/RabbitMQ)"}</span>{"\n"}
+  socket.<span className="text-blue-400">on</span>(<span className="text-green-300">'sendMessage'</span>, <span className="text-pink-400">async</span> (<span className="text-orange-300">msg</span>) <span className="text-pink-400">=&gt;</span> {'{'}{"\n"}
+{"    "}<span className="text-pink-400">await</span> kafka.send({'{'}{"\n"}
+      topic: <span className="text-green-300">'chat_messages'</span>,{"\n"}
+      messages: [JSON.stringify(msg)]{"\n"}
+{"    "}{'}'});{"\n"}
+{"  "}{'});'}{"\n"}
+{'});'}{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400">
@@ -251,22 +254,22 @@ const ChatAppCaseStudy = () => {
           </div>
 
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
-            <div className="px-4 py-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+            <div className="px-4 py-3 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950 gap-2">
               <span className="text-sm font-semibold text-slate-300 flex items-center gap-2">
                 <Database size={16} className="text-emerald-400" /> 2. Database Schema (Cassandra/ScyllaDB)
               </span>
               <span className="text-xs text-slate-500 font-mono">CQL (Cassandra Query Language)</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-pink-400">CREATE TABLE</span> <span className="text-blue-300">chat_messages</span> (
-    <span className="text-orange-300">channel_id</span>    <span className="text-green-300">uuid</span>,
-    <span className="text-orange-300">message_id</span>    <span className="text-green-300">timeuuid</span>,
-    <span className="text-orange-300">sender_id</span>     <span className="text-green-300">uuid</span>,
-    <span className="text-orange-300">content</span>       <span className="text-green-300">text</span>,
-    <span className="text-orange-300">created_at</span>    <span className="text-green-300">timestamp</span>,
-    <span className="text-pink-400">PRIMARY KEY</span> ((<span className="text-orange-300">channel_id</span>), <span className="text-orange-300">message_id</span>)
-) <span className="text-pink-400">WITH CLUSTERING ORDER BY</span> (<span className="text-orange-300">message_id</span> <span className="text-blue-400">DESC</span>);
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-pink-400">CREATE TABLE</span> <span className="text-blue-300">chat_messages</span> ({"\n"}
+{"    "}<span className="text-orange-300">channel_id</span>    <span className="text-green-300">uuid</span>,{"\n"}
+{"    "}<span className="text-orange-300">message_id</span>    <span className="text-green-300">timeuuid</span>,{"\n"}
+{"    "}<span className="text-orange-300">sender_id</span>     <span className="text-green-300">uuid</span>,{"\n"}
+{"    "}<span className="text-orange-300">content</span>       <span className="text-green-300">text</span>,{"\n"}
+{"    "}<span className="text-orange-300">created_at</span>    <span className="text-green-300">timestamp</span>,{"\n"}
+{"    "}<span className="text-pink-400">PRIMARY KEY</span> ((<span className="text-orange-300">channel_id</span>), <span className="text-orange-300">message_id</span>){"\n"}
+) <span className="text-pink-400">WITH CLUSTERING ORDER BY</span> (<span className="text-orange-300">message_id</span> <span className="text-blue-400">DESC</span>);{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400 space-y-2">

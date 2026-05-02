@@ -230,18 +230,18 @@ const SaaSCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">SQL</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-slate-500">{"-- Bật RLS cho bảng users"}</span>
-<span className="text-pink-400">ALTER TABLE</span> <span className="text-blue-300">users</span> <span className="text-pink-400">ENABLE ROW LEVEL SECURITY</span>;
-
-<span className="text-slate-500">{"-- Tạo chính sách: user chỉ được xem dữ liệu cùng tenant_id"}</span>
-<span className="text-pink-400">CREATE POLICY</span> <span className="text-green-300">tenant_isolation_policy</span> <span className="text-pink-400">ON</span> <span className="text-blue-300">users</span>
-<span className="text-pink-400">USING</span> (<span className="text-orange-300">tenant_id</span> = <span className="text-blue-400">current_setting</span>(<span className="text-green-300">'app.current_tenant_id'</span>)::uuid);
-
-<span className="text-slate-500">{"-- Ở Backend (VD: Node.js), trước khi query, ta set biến môi trường này:"}</span>
-<span className="text-slate-500">{"-- await db.query(\"SET LOCAL app.current_tenant_id = '\" + tenantId + \"'\");"}</span>
-<span className="text-slate-500">{"-- await db.query(\"SELECT * FROM users\"); // Tự động chỉ lấy user của tenant đó"}</span>
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-slate-500">{"-- Bật RLS cho bảng users"}</span>{"\n"}
+<span className="text-pink-400">ALTER TABLE</span> <span className="text-blue-300">users</span> <span className="text-pink-400">ENABLE ROW LEVEL SECURITY</span>;{"\n"}
+{"\n"}
+<span className="text-slate-500">{"-- Tạo chính sách: user chỉ được xem dữ liệu cùng tenant_id"}</span>{"\n"}
+<span className="text-pink-400">CREATE POLICY</span> <span className="text-green-300">tenant_isolation_policy</span> <span className="text-pink-400">ON</span> <span className="text-blue-300">users</span>{"\n"}
+<span className="text-pink-400">USING</span> (<span className="text-orange-300">tenant_id</span> = <span className="text-blue-400">current_setting</span>(<span className="text-green-300">'app.current_tenant_id'</span>)::uuid);{"\n"}
+{"\n"}
+<span className="text-slate-500">{"-- Ở Backend (VD: Node.js), trước khi query, ta set biến môi trường này:"}</span>{"\n"}
+<span className="text-slate-500">{"-- await db.query(\"SET LOCAL app.current_tenant_id = '\" + tenantId + \"'\");"}</span>{"\n"}
+<span className="text-slate-500">{"-- await db.query(\"SELECT * FROM users\"); // Tự động chỉ lấy user của tenant đó"}</span>{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400">
@@ -256,23 +256,24 @@ const SaaSCaseStudy = () => {
               </span>
               <span className="text-xs text-slate-500 font-mono">Redis Lua Script</span>
             </div>
-            <div className="p-4 bg-[#0d1117] overflow-x-auto">
-<pre className="text-sm font-mono leading-relaxed">
-<span className="text-slate-500">{"// Lấy thông tin gói cước của Tenant (Free: 100 req/min, Pro: 1000 req/min)"}</span>
-<span className="text-pink-400">const</span> limit = tenant.plan === <span className="text-green-300">'Pro'</span> ? <span className="text-orange-300">1000</span> : <span className="text-orange-300">100</span>;
-<span className="text-pink-400">const</span> key = <span className="text-green-300">`rate_limit:<span className="text-blue-300">${'{tenant.id}'}</span>:<span className="text-blue-300">${'{currentMinute}'}</span>`</span>;
-
-<span className="text-slate-500">{"// Dùng Redis INCR để đếm số request"}</span>
-<span className="text-pink-400">const</span> currentReqs = <span className="text-pink-400">await</span> redis.<span className="text-blue-400">incr</span>(key);
-
-<span className="text-pink-400">if</span> (currentReqs === <span className="text-orange-300">1</span>) {'{'}
-  <span className="text-slate-500">{"// Nếu là request đầu tiên trong phút, set thời gian hết hạn (TTL) là 60s"}</span>
-  <span className="text-pink-400">await</span> redis.<span className="text-blue-400">expire</span>(key, <span className="text-orange-300">60</span>);
-{'}'}
-
-<span className="text-pink-400">if</span> (currentReqs &gt; limit) {'{'}
-  <span className="text-pink-400">throw new</span> <span className="text-blue-300">Error</span>(<span className="text-green-300">"429: Too Many Requests. Please upgrade your plan."</span>);
-{'}'}
+            <div className="w-full bg-[#0d1117] overflow-x-auto">
+              <pre className="p-4 text-sm font-mono leading-relaxed min-w-max">
+<span className="text-slate-500">{"// Lấy thông tin gói cước của Tenant"}</span>{"\n"}
+<span className="text-slate-500">{"// (Free: 100 req/min, Pro: 1000 req/min)"}</span>{"\n"}
+<span className="text-pink-400">const</span> limit = tenant.plan === <span className="text-green-300">'Pro'</span> ? <span className="text-orange-300">1000</span> : <span className="text-orange-300">100</span>;{"\n"}
+<span className="text-pink-400">const</span> key = <span className="text-green-300">`rate_limit:<span className="text-blue-300">${'{tenant.id}'}</span>:<span className="text-blue-300">${'{currentMinute}'}</span>`</span>;{"\n"}
+{"\n"}
+<span className="text-slate-500">{"// Dùng Redis INCR để đếm số request"}</span>{"\n"}
+<span className="text-pink-400">const</span> currentReqs = <span className="text-pink-400">await</span> redis.<span className="text-blue-400">incr</span>(key);{"\n"}
+{"\n"}
+<span className="text-pink-400">if</span> (currentReqs === <span className="text-orange-300">1</span>) {'{'}{"\n"}
+{"  "}<span className="text-slate-500">{"// Nếu là request đầu tiên trong phút, set thời gian hết hạn (TTL) là 60s"}</span>{"\n"}
+{"  "}<span className="text-pink-400">await</span> redis.<span className="text-blue-400">expire</span>(key, <span className="text-orange-300">60</span>);{"\n"}
+{'}'}{"\n"}
+{"\n"}
+<span className="text-pink-400">if</span> (currentReqs &gt; limit) {'{'}{"\n"}
+{"  "}<span className="text-pink-400">throw new</span> <span className="text-blue-300">Error</span>(<span className="text-green-300">"429: Too Many Requests. Please upgrade your plan."</span>);{"\n"}
+{'}'}{"\n"}
 </pre>
             </div>
             <div className="p-4 bg-slate-900 border-t border-slate-800 text-sm text-slate-400">
